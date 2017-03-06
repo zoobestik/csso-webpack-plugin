@@ -6,8 +6,11 @@
 Plugin good in pair with [ExtractTextPlugin](https://github.com/webpack-contrib/extract-text-webpack-plugin).
 
 **Why is not [csso-loader](https://www.npmjs.com/package/csso-loader) or [postcss-csso](https://github.com/lahmatiy/postcss-csso)?**
- * **[Full](https://rawgithub.com/zoobestik/csso-webpack-plugin/dev/docs/img/better-full.svg) restructuring** in bundles: ![better](https://rawgithub.com/zoobestik/csso-webpack-plugin/dev/docs/img/better.svg)
- * No problems with css-modules syntax like `:global(.c .d) .a { color: #fff; }` <img src="docs/img/css-modules.png" width="320" alt="syntax">
+ * **[Full](https://rawgithub.com/zoobestik/csso-webpack-plugin/dev/docs/img/better-full.svg) restructuring** in bundles:
+ ![better](https://rawgithub.com/zoobestik/csso-webpack-plugin/dev/docs/img/better.svg)
+ 
+ * No problems with **css-modules** syntax like `:global(.c .d) .a { color: #fff; }`
+ <img src="docs/img/css-modules.png" width="320" alt="syntax">
 
 ## Install
 
@@ -22,11 +25,11 @@ npm i -D csso-webpack-plugin
 ## Usage
 
 ```js
-const CSSOCompressPlugin = require("csso-webpack-plugin");
+const CssoWebpackPlugin = require("csso-webpack-plugin");
 
 module.exports = {
   plugins: [
-    new CSSOCompressPlugin(),
+    new CssoWebpackPlugin(),
   ]
 }
 ```

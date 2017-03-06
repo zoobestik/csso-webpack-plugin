@@ -1,0 +1,61 @@
+{
+  "name": "csso-webpack-plugin",
+  "version": "1.0.0-alpha",
+  "author": "zoobestik <kb.chernenko@gmail.com>",
+  "description": "CSSO minification files to serve your webpack bundles",
+  "homepage": "https://github.com/zoobestik/csso-webpack-plugin",
+  "bugs": {
+    "url": "https://github.com/zoobestik/csso-webpack-plugin/issues"
+  },
+  "keywords": [
+    "css",
+    "minify",
+    "csso",
+    "webpack",
+    "optimisation"
+  ],
+  "main": "./lib/index",
+  "engines": {
+    "node": ">=0.10.0"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "http://www.opensource.org/licenses/mit-license.php"
+    }
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/zoobestik/csso-webpack-plugin.git"
+  },
+  "scripts": {
+    "testss": "echo \"Error: no tests specified\" && exit 1",
+    "lint": "eslint --cache .",
+    "lint-and-tests": "npm run lint && npm tests",
+    "coverage": "echo \"Error: no coverage specified\" && exit 1",
+    "coveralls": "echo \"Error: no coveralls specified\" && exit 1",
+    "test": "npm run lint-and-tests && npm run coveralls",
+    "build": "babel src --out-dir lib",
+    "prepublish": "npm run build"
+  },
+  "files": [
+    "lib",
+    "CHANGELOG.md",
+    "LICENSE",
+    "README.md"
+  ],
+  "dependencies": {
+    "async": "^2.1.5",
+    "csso": "^2.3.1",
+    "webpack-sources": "^0.1.4"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.23.0",
+    "babel-eslint": "^7.1.1",
+    "babel-plugin-transform-object-rest-spread": "^6.23.0",
+    "babel-preset-env": "^1.2.0",
+    "eslint": "^3.17.0",
+    "eslint-config-airbnb-base": "^11.1.1",
+    "eslint-plugin-import": "^2.2.0"
+  }
+}

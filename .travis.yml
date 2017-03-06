@@ -1,0 +1,17 @@
+sudo: false
+dist: trusty
+
+language: node_js
+
+node_js:
+  - "0.10"
+  - "0.12"
+  - "4"
+  - "node"
+
+branches:
+  except:
+    - gh-pages
+
+notifications:
+  email: false

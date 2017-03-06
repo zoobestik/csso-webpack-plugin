@@ -1,0 +1,33 @@
+{
+    "root": true,
+    "parser": "babel-eslint",
+    "extends": [
+        "airbnb-base"
+    ],
+    "rules": {
+        "max-len": [
+            "error",
+            120
+        ],
+
+        "indent": [
+            "error",
+            4
+        ],
+
+        "comma-dangle": [
+            "error",
+            "always-multiline"
+        ],
+
+        "arrow-parens": [
+            "error",
+            "as-needed"
+        ],
+
+        "no-param-reassign": [
+            "error",
+            { "props": false }
+        ]
+    }
+}

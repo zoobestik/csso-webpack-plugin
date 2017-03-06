@@ -3,13 +3,11 @@
 [![node][node]][node-url]
 [![deps][deps]][deps-url]
 
-Plugin good in pair with [ExtractTextPlugin](https://github.com/webpack-contrib/extract-text-webpack-plugin).
-
-**Why is not [csso-loader](https://www.npmjs.com/package/csso-loader) or [postcss-csso](https://github.com/lahmatiy/postcss-csso)?**
+ **Why is not [csso-loader](https://www.npmjs.com/package/csso-loader) or [postcss-csso](https://github.com/lahmatiy/postcss-csso)?** Plugin good in pair with [ExtractTextPlugin](https://github.com/webpack-contrib/extract-text-webpack-plugin).
  * **[Full](https://rawgithub.com/zoobestik/csso-webpack-plugin/dev/docs/img/better-full.svg) restructuring** in bundles:
  ![better](https://rawgithub.com/zoobestik/csso-webpack-plugin/dev/docs/img/better.svg)
  
- * No problems with **css-modules** syntax like `:global(.c .d) .a { color: #fff; }`
+ * No problems with custom syntax like **css-modules** – `:global(.c .d) .a { color: #fff; }`
  <img src="docs/img/css-modules.png" width="320" alt="syntax">
 
 ## Install
@@ -43,6 +41,9 @@ new CSSOCompressPlugin([options: CssoOptions], [filter: function | RegExp])
 Arguments:
 * **options** — csso [options](https://github.com/css/csso#minifysource-options). 
 * **filter** — Detect should be file processed. *Defaults to ends `".css"`*.
+
+## Acknowledgements
+[![Develop By](https://img.shields.io/badge/develop%20by-zoobestik-blue.svg?style=flat)](https://ru.linkedin.com/in/kbchernenko) [![MIT license](https://img.shields.io/badge/license-MIT-brightgreen.svg)](http://opensource.org/licenses/MIT)
 
 [npm]: https://img.shields.io/npm/v/csso-webpack-plugin.svg
 [npm-url]: https://npmjs.com/package/csso-webpack-plugin

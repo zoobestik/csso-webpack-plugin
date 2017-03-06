@@ -3,14 +3,20 @@
 [![node][node]][node-url]
 [![deps][deps]][deps-url]
 
-CSSO compression plugin for webpack with **full restructuring** for bundle.
+Plugin good in pair with [ExtractTextPlugin](https://github.com/webpack-contrib/extract-text-webpack-plugin).
 
-**Attention! This is alpha version!**
-* **No source maps**
-* **No exception pretty print**
-* **No anything else except basic minify**
+**Why is not [csso-loader](https://www.npmjs.com/package/csso-loader) or [postcss-csso](https://github.com/lahmatiy/postcss-csso)?**
+ * **[Full](https://rawgithub.com/zoobestik/csso-webpack-plugin/dev/docs/img/better-full.svg) restructuring** in bundles:
+ ![better](https://rawgithub.com/zoobestik/csso-webpack-plugin/dev/docs/img/better.svg)
+ 
+ * No problems with **css-modules** syntax like `:global(.c .d) .a { color: #fff; }`
+ <img src="docs/img/css-modules.png" width="320" alt="syntax">
 
 ## Install
+
+**Attention! This is alpha version!**
+ * **No source maps**
+ * **No anything else except basic minify**
 
 ```bash
 npm i -D csso-webpack-plugin
@@ -19,15 +25,14 @@ npm i -D csso-webpack-plugin
 ## Usage
 
 ```js
-const CSSOCompressPlugin = require("csso-webpack-plugin");
+const CssoWebpackPlugin = require("csso-webpack-plugin");
 
 module.exports = {
   plugins: [
-    new CSSOCompressPlugin(),
+    new CssoWebpackPlugin(),
   ]
 }
 ```
-
 
 ## Options
 
@@ -36,8 +41,8 @@ new CSSOCompressPlugin([options: CssoOptions], [filter: function | RegExp])
 ```
 
 Arguments:
-* [`options`]: [csso options](https://github.com/css/csso#minifysource-options). 
-* [`filter`]: Can be a `function(file)` or a regular expression. Should be file processed. Defaults to ends `".css"`.
+* **options** — csso [options](https://github.com/css/csso#minifysource-options). 
+* **filter** — Detect should be file processed. *Defaults to ends `".css"`*.
 
 [npm]: https://img.shields.io/npm/v/csso-webpack-plugin.svg
 [npm-url]: https://npmjs.com/package/csso-webpack-plugin

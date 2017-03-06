@@ -11,6 +11,11 @@ export default class CSSOCompressPlugin {
         this.options = options;
         this.filter = filter;
 
+        if (typeof this.options === 'function' && typeof this.filter === 'undefined') {
+            this.filter = options;
+            this.options = undefined;
+        }
+
         if (!filter) {
             this.filter = filterDefault;
         }

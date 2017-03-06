@@ -1,11 +1,14 @@
-** Attention! this is very very alpha version! **
-
 # CSSO Compression Plugin
 [![npm][npm]][npm-url]
 [![node][node]][node-url]
 [![deps][deps]][deps-url]
 
-CSSO compression plugin for webpack with **restructuring for full bundle**.
+CSSO compression plugin for webpack with **full restructuring** for bundle.
+
+**Attention! This is alpha version!**
+* **No source maps**
+* **No exception pretty print**
+* **No anything else except basic minify**
 
 ## Install
 

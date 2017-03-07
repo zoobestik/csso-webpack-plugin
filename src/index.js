@@ -4,22 +4,23 @@ import RawSource from 'webpack-sources/lib/RawSource';
 
 const filterDefault = file => file.endsWith('.css');
 const createRegexpFilter = regex => str => regex.test(str);
+const isFilterType = inst => typeof inst === 'function' || inst instanceof RegExp;
 
 export default class CssoWebpackPlugin {
     constructor(options, filter) {
         this.options = options;
         this.filter = filter;
 
-        if (typeof this.options === 'function' && typeof this.filter === 'undefined') {
+        if (isFilterType(this.options) && typeof this.filter === 'undefined') {
             this.filter = options;
             this.options = undefined;
         }
 
-        if (!filter) {
+        if (typeof this.filter === 'undefined') {
             this.filter = filterDefault;
         }
 
-        if (typeof filter !== 'function') {
+        if (typeof this.filter !== 'function') {
             this.filter = createRegexpFilter(filter);
         }
     }
@@ -28,11 +29,11 @@ export default class CssoWebpackPlugin {
         compiler.plugin('this-compilation', compilation => {
             compilation.plugin('optimize-assets', (assets, callback) => {
                 async.forEach(Object.keys(assets), file => {
-                    if (!file.endsWith('.css')) {
-                        return callback();
-                    }
-
                     try {
+                        if (!this.filter(file)) {
+                            return callback();
+                        }
+
                         const asset = assets[file];
                         let source = asset.source();
 
@@ -46,12 +47,12 @@ export default class CssoWebpackPlugin {
                     } catch (err) {
                         let msg;
                         const prefix = `${file} from CssoWebpackPlugin\n`;
-                        const { message, parseError } = err;
+                        const { message, parseError, stack } = err;
 
                         if (parseError) {
                             msg = `${message} [${file}:${parseError.line}:${parseError.column}]`;
                         } else {
-                            msg = message || err.stack;
+                            msg = message || stack;
                         }
 
                         if (msg) {

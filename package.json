@@ -38,6 +38,9 @@
     "build": "babel src --out-dir lib",
     "prepublish": "npm run build"
   },
+  "precommit": [
+    "lint"
+  ],
   "files": [
     "lib",
     "CHANGELOG.md",
@@ -56,6 +59,7 @@
     "babel-preset-env": "^1.2.0",
     "eslint": "^3.17.0",
     "eslint-config-airbnb-base": "^11.1.1",
-    "eslint-plugin-import": "^2.2.0"
+    "eslint-plugin-import": "^2.2.0",
+    "pre-commit": "^1.2.2"
   }
 }

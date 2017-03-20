@@ -30,8 +30,11 @@ export default class CssoWebpackPlugin {
     }
 
     apply(compiler) {
-        compiler.plugin('this-compilation', compilation => {
-            if (this.options.sourceMap) {
+        compiler.plugin('compilation', compilation => {
+            const options = this.options;
+            const optSourceMap = options.sourceMap;
+
+            if (optSourceMap) {
                 compilation.plugin('build-module', module => {
                     module.useSourceMap = true;
                 });
@@ -47,19 +50,14 @@ export default class CssoWebpackPlugin {
                         let source;
                         let sourceMap;
 
-                        const options = this.options;
                         const asset = assets[file];
 
-                        if (options.sourceMap) {
-                            if (asset.sourceAndMap) {
-                                const sourceAndMap = asset.sourceAndMap();
-                                sourceMap = sourceAndMap.map;
-                                source = sourceAndMap.source;
-                            } else {
-                                sourceMap = asset.map();
-                                source = asset.source();
-                            }
+                        if (asset.sourceAndMap) {
+                            const sourceAndMap = asset.sourceAndMap();
+                            sourceMap = sourceAndMap.map;
+                            source = sourceAndMap.source;
                         } else {
+                            sourceMap = asset.map();
                             source = asset.source();
                         }
 
@@ -70,19 +68,22 @@ export default class CssoWebpackPlugin {
                         let { css, map } = csso.minify(source, { // eslint-disable-line prefer-const
                             ...options,
                             filename: file,
+                            sourceMap: typeof optSourceMap !== 'undefined' ? optSourceMap : Boolean(sourceMap),
                         });
 
-                        if (options.sourceMap && sourceMap) {
-                            if (map) {
-                                map.applySourceMap(new SourceMapConsumer(sourceMap), file);
-                            } else {
-                                map = sourceMap;
-                            }
+                        if (map && sourceMap) {
+                            map.applySourceMap(new SourceMapConsumer(sourceMap), file);
                         }
 
-                        compilation.assets[file] = map ?
-                            new SourceMapSource(css, file, map.toJSON(), source, sourceMap) :
-                            new RawSource(css);
+                        if (!map) {
+                            map = sourceMap;
+                        }
+
+                        if (map) {
+                            compilation.assets[file] = new SourceMapSource(css, file, map, source, sourceMap);
+                        } else {
+                            compilation.assets[file] = new RawSource(css);
+                        }
                     } catch (err) {
                         let error = err;
                         const prefix = `${file} from CssoWebpackPlugin\n`;

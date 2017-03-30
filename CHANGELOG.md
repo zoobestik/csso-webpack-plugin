@@ -1,5 +1,12 @@
 # Change Log
 
+## 1.0-beta.1 (March 30, 2017)
+
+Source Maps feature supported 
+
+* Initial **source map** feature implementation
+* Update-to-date dependencies versions
+
 ## 1.0-alpha.4 (March 7, 2017)
 
 Acknowledgements and regex filter

@@ -50,6 +50,7 @@
   "dependencies": {
     "async": "^2.1.5",
     "csso": "^3.0.1",
+    "source-map": "^0.5.6",
     "webpack-sources": "^0.2.0"
   },
   "devDependencies": {

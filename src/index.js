@@ -1,12 +1,18 @@
 import csso from 'csso';
 import async from 'async';
 import RawSource from 'webpack-sources/lib/RawSource';
+import ConcatSource from 'webpack-sources/lib/ConcatSource';
 import SourceMapSource from 'webpack-sources/lib/SourceMapSource';
 import { SourceMapConsumer } from 'source-map';
 
 const filterDefault = file => file.endsWith('.css');
 const createRegexpFilter = regex => str => regex.test(str);
 const isFilterType = inst => typeof inst === 'function' || inst instanceof RegExp;
+
+const SOURCEMAP_INLINE_DEVTOOL = [];
+const isInline = devtool => SOURCEMAP_INLINE_DEVTOOL.indexOf(devtool) !== -1;
+
+const sourceMapURL = content => `\n/*# sourceMappingURL=${content} */`;
 
 export default class CssoWebpackPlugin {
     constructor(options, filter) {
@@ -33,6 +39,7 @@ export default class CssoWebpackPlugin {
         compiler.plugin('compilation', compilation => {
             const options = this.options;
             const optSourceMap = options.sourceMap;
+            const devtool = compiler.options.devtool;
 
             if (optSourceMap) {
                 compilation.plugin('build-module', module => {
@@ -79,11 +86,31 @@ export default class CssoWebpackPlugin {
                             map = sourceMap;
                         }
 
+                        let out = new RawSource(css);
+
                         if (map) {
-                            compilation.assets[file] = new SourceMapSource(css, file, map, source, sourceMap);
-                        } else {
-                            compilation.assets[file] = new RawSource(css);
+                            let isInlineUrl = isInline(devtool);
+                            const inputMapComment = source.match(/\/\*# sourceMappingURL=(\S+)\s*\*\/\s*$/);
+                            const prevSourceMap = inputMapComment && inputMapComment[1];
+
+                            if (prevSourceMap) {
+                                isInlineUrl = prevSourceMap.startsWith('data:application/json;charset=utf-8;base64');
+                            }
+
+                            if (optSourceMap === 'inline') {
+                                isInlineUrl = true;
+                            }
+
+                            if (isInlineUrl) {
+                                const base64 = new Buffer(map.toString()).toString('base64');
+                                out = new ConcatSource(out, sourceMapURL(`data:application/json;base64,${base64}`));
+                            } else {
+                                const srcMapUrl = prevSourceMap || `${file}.map`; // @ToDo: compilation.getPath
+                                out = new SourceMapSource(css + sourceMapURL(srcMapUrl), file, map, source, sourceMap);
+                            }
                         }
+
+                        compilation.assets[file] = out;
                     } catch (err) {
                         let error = err;
                         const prefix = `${file} from CssoWebpackPlugin\n`;

@@ -48,18 +48,18 @@
     "README.md"
   ],
   "dependencies": {
-    "async": "^2.1.5",
+    "async": "^2.2.0",
     "csso": "^3.0.1",
     "source-map": "^0.5.6",
-    "webpack-sources": "^0.2.0"
+    "webpack-sources": "^0.2.3"
   },
   "devDependencies": {
     "babel-cli": "^6.24.0",
-    "babel-eslint": "^7.1.1",
+    "babel-eslint": "^7.2.1",
     "babel-plugin-transform-object-rest-spread": "^6.23.0",
     "babel-preset-env": "^1.2.2",
     "eslint": "^3.18.0",
-    "eslint-config-airbnb-base": "^11.1.1",
+    "eslint-config-airbnb-base": "^11.1.2",
     "eslint-plugin-import": "^2.2.0",
     "pre-commit": "^1.2.2"
   }

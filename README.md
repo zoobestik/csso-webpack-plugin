@@ -27,7 +27,7 @@ module.exports = {
   module: { /* ... */ },
   plugins: [
     new ExtractTextPlugin('[name].css'),
-    new CssoWebpackPlugin(),
+    new CssoWebpackPlugin({ sourceMap: true }),
   ]
 }
 ```
@@ -40,6 +40,7 @@ new CSSOCompressPlugin([options: CssoOptions], [filter: function | RegExp])
 
 Arguments:
 * `options` — [csso options](https://github.com/css/csso#minifysource-options).
+* `options.sourceMap` – type of source map *"inline"*, *"hidden"*, *"source-map"* or *true* (detect automatically). Default: *false*.
 * `filter` — Detect should be file processed. Defaults: *to ends with `.css`*.
 
 ## Acknowledgements

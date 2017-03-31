@@ -9,9 +9,6 @@ const filterDefault = file => file.endsWith('.css');
 const createRegexpFilter = regex => str => regex.test(str);
 const isFilterType = inst => typeof inst === 'function' || inst instanceof RegExp;
 
-const SOURCEMAP_INLINE_DEVTOOL = [];
-const isInline = devtool => SOURCEMAP_INLINE_DEVTOOL.indexOf(devtool) !== -1;
-
 const sourceMapURL = content => `\n/*# sourceMappingURL=${content} */`;
 
 export default class CssoWebpackPlugin {
@@ -32,16 +29,18 @@ export default class CssoWebpackPlugin {
             this.filter = createRegexpFilter(filter);
         }
 
-        this.options = this.options || {};
+        this.options = this.options || {
+            sourceMap: false,
+        };
     }
 
     apply(compiler) {
         compiler.plugin('compilation', compilation => {
             const options = this.options;
             const optSourceMap = options.sourceMap;
-            const devtool = compiler.options.devtool;
+            const withSourceMap = Boolean(optSourceMap);
 
-            if (optSourceMap) {
+            if (withSourceMap) {
                 compilation.plugin('build-module', module => {
                     module.useSourceMap = true;
                 });
@@ -75,7 +74,7 @@ export default class CssoWebpackPlugin {
                         let { css, map } = csso.minify(source, { // eslint-disable-line prefer-const
                             ...options,
                             filename: file,
-                            sourceMap: typeof optSourceMap !== 'undefined' ? optSourceMap : Boolean(sourceMap),
+                            sourceMap: withSourceMap,
                         });
 
                         if (map && sourceMap) {
@@ -88,25 +87,34 @@ export default class CssoWebpackPlugin {
 
                         let out = new RawSource(css);
 
-                        if (map) {
-                            let isInlineUrl = isInline(devtool);
-                            const inputMapComment = source.match(/\/\*# sourceMappingURL=(\S+)\s*\*\/\s*$/);
-                            const prevSourceMap = inputMapComment && inputMapComment[1];
+                        if (withSourceMap && map) {
+                            let srcMapUrl;
+                            let isInline = optSourceMap === 'inline';
 
-                            if (prevSourceMap) {
-                                isInlineUrl = prevSourceMap.startsWith('data:application/json;charset=utf-8;base64');
+                            if (optSourceMap === true) {
+                                const inputMapComment = source.match(/\/\*# sourceMappingURL=(\S+)\s*\*\/\s*$/);
+                                const prevSourceMap = (inputMapComment && inputMapComment[1]) || '';
+
+                                if (prevSourceMap) {
+                                    if (prevSourceMap.startsWith('data:application/json;charset=utf-8;base64')) {
+                                        isInline = true;
+                                    } else {
+                                        srcMapUrl = prevSourceMap;
+                                    }
+                                }
                             }
 
-                            if (optSourceMap === 'inline') {
-                                isInlineUrl = true;
-                            }
-
-                            if (isInlineUrl) {
+                            if (isInline) {
                                 const base64 = new Buffer(map.toString()).toString('base64');
-                                out = new ConcatSource(out, sourceMapURL(`data:application/json;base64,${base64}`));
+                                out = new ConcatSource(out,
+                                    sourceMapURL(`data:application/json;charset=utf-8;base64,${base64}`)
+                                );
                             } else {
-                                const srcMapUrl = prevSourceMap || `${file}.map`; // @ToDo: compilation.getPath
-                                out = new SourceMapSource(css + sourceMapURL(srcMapUrl), file, map, source, sourceMap);
+                                if (optSourceMap !== 'hidden') {
+                                    css += sourceMapURL(srcMapUrl || `${file}.map`); // @ToDo: compilation.getPath
+                                }
+
+                                out = new SourceMapSource(css, file, map, source, sourceMap);
                             }
                         }
 

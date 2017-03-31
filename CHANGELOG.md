@@ -1,5 +1,12 @@
 # Change Log
 
+## 1.0-beta.2 (March 31, 2017)
+
+Strict source map type from options
+
+* `options.sourceMap` is enum and **required** for generate source maps.
+* Add strong dependencies for *[yarn](https://yarnpkg.com/en/) package manager*.
+
 ## 1.0-beta.1 (March 30, 2017)
 
 Source Maps feature supported 

@@ -21,7 +21,7 @@ npm i -D csso-webpack-plugin
 ## Usage
 Plugin good to use in pair with [ExtractTextPlugin](https://github.com/webpack-contrib/extract-text-webpack-plugin).
 ```js
-const CssoWebpackPlugin = require('csso-webpack-plugin');
+const CssoWebpackPlugin = require('csso-webpack-plugin').default;
 
 module.exports = {
   module: { /* ... */ },

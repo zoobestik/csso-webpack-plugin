@@ -11,3 +11,4 @@ npm-debug.log
 
 .eslintcache
 lib
+test/_out

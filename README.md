@@ -2,6 +2,7 @@
 [![npm][npm]][npm-url]
 [![node][node]][node-url]
 [![deps][deps]][deps-url]
+[![status](https://travis-ci.org/zoobestik/csso-webpack-plugin.svg)](https://travis-ci.org/zoobestik/csso-webpack-plugin)
  
  **Why is not [csso-loader](https://www.npmjs.com/package/csso-loader) or [postcss-csso](https://github.com/lahmatiy/postcss-csso)?**
  * **[Full restructuring](https://rawgithub.com/zoobestik/csso-webpack-plugin/dev/docs/img/better-full.svg)** in bundles:

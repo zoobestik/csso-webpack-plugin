@@ -16,7 +16,7 @@
   ],
   "main": "./lib/index",
   "engines": {
-    "node": ">=0.10.0"
+    "node": ">=4.0.0"
   },
   "licenses": [
     {
@@ -29,12 +29,10 @@
     "url": "https://github.com/zoobestik/csso-webpack-plugin.git"
   },
   "scripts": {
-    "testss": "echo \"Error: no tests specified\" && exit 1",
+    "itest": "npm run build && mocha",
     "lint": "eslint --cache .",
-    "lint-and-tests": "npm run lint && npm tests",
-    "coverage": "echo \"Error: no coverage specified\" && exit 1",
-    "coveralls": "echo \"Error: no coveralls specified\" && exit 1",
-    "test": "npm run lint-and-tests && npm run coveralls",
+    "lint-and-tests": "npm run lint && npm run itest",
+    "test": "npm run lint-and-tests",
     "build": "babel src --out-dir lib",
     "prepublish": "npm run build"
   },
@@ -48,19 +46,24 @@
     "README.md"
   ],
   "dependencies": {
-    "async": "^2.2.0",
+    "async": "^2.3.0",
     "csso": "^3.0.1",
     "source-map": "^0.5.6",
     "webpack-sources": "^0.2.3"
   },
   "devDependencies": {
-    "babel-cli": "^6.24.0",
+    "babel-cli": "^6.24.1",
     "babel-eslint": "^7.2.1",
     "babel-plugin-transform-object-rest-spread": "^6.23.0",
-    "babel-preset-env": "^1.2.2",
-    "eslint": "^3.18.0",
-    "eslint-config-airbnb-base": "^11.1.2",
+    "babel-preset-env": "^1.3.3",
+    "css-loader": "^0.28.0",
+    "eslint": "^3.19.0",
+    "eslint-config-airbnb-base": "^11.1.3",
     "eslint-plugin-import": "^2.2.0",
-    "pre-commit": "^1.2.2"
+    "extract-text-webpack-plugin": "^2.1.0",
+    "mocha": "^3.2.0",
+    "pre-commit": "^1.2.2",
+    "rimraf": "^2.6.1",
+    "webpack": "^2.3.3"
   }
 }

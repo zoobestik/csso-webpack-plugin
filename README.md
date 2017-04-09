@@ -2,7 +2,7 @@
 [![npm][npm]][npm-url]
 [![node][node]][node-url]
 [![dependencies](https://img.shields.io/david/zoobestik/csso-webpack-plugin.svg)](https://david-dm.org/zoobestik/csso-webpack-plugin)
-[![status](https://travis-ci.org/zoobestik/csso-webpack-plugin.svg)](https://travis-ci.org/zoobestik/csso-webpack-plugin)
+[![status](https://travis-ci.org/zoobestik/csso-webpack-plugin.svg?branch=master)](https://travis-ci.org/zoobestik/csso-webpack-plugin)
 ![downloads](https://img.shields.io/npm/dm/csso-webpack-plugin.svg)
 
  **Why is not [csso-loader](https://www.npmjs.com/package/csso-loader) or [postcss-csso](https://github.com/lahmatiy/postcss-csso)?**

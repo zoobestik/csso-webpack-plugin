@@ -118,7 +118,14 @@ export default class CssoWebpackPlugin {
                                 );
                             } else {
                                 if (!isHiddenMap) {
-                                    css += sourceMapURL(srcMapUrl || `${file}.map`); // @ToDo: compilation.getPath
+                                    if (!srcMapUrl) {
+                                        srcMapUrl = compilation.getPath(compilation.outputOptions.sourceMapFilename, {
+                                            filename: file,
+                                            chunk: compilation.chunks[0],
+                                        });
+                                    }
+
+                                    css += sourceMapURL(srcMapUrl);
                                 }
 
                                 out = new SourceMapSource(css, file, map, source, sourceMap);

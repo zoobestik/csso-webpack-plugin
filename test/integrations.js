@@ -28,6 +28,7 @@ describe('Integrations with webpack 2', function() {
                 if (fs.existsSync(configFile)) {
                     const testConfig = require(configFile);
                     options = Object.assign({}, options, testConfig, {
+                        output: Object.assign({}, options.output, testConfig.output),
                         plugins: options.plugins.concat(testConfig.plugins)
                     });
                 }
@@ -37,7 +38,9 @@ describe('Integrations with webpack 2', function() {
                     if (stats.hasErrors()) return reject(new Error(stats.toString()));
 
                     const actual = fs.readFileSync(join(outputDirectory, 'test.css'), 'utf-8');
-                    const expected = fs.readFileSync(join(testDirectory, 'expected.css'), 'utf-8').replace(/\n$/g, '');
+                    const expected = fs.readFileSync(join(testDirectory, 'expected.css'), 'utf-8')
+                        .replace(/\n$/g, '')
+                        .replace(/%%unit-hash%%/g, stats.hash);
 
                     assert.equal(actual, expected,
                         'Output ' + testCase + '/test.css file isn\'t equals ' + testCase + '/expected.css'

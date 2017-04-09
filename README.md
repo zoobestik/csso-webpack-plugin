@@ -1,4 +1,4 @@
-# CSSO Compression Plugin (for webpack 2)
+# CSSO Compression Plugin
 [![npm][npm]][npm-url]
 [![node][node]][node-url]
 [![deps][deps]][deps-url]
@@ -12,9 +12,6 @@
  <img src="https://rawgithub.com/zoobestik/csso-webpack-plugin/dev/docs/img/css-modules.png" width="320" alt="syntax">
 
 ## Install
-
-**Attention! This is only alpha version!**
-
 ```bash
 npm i -D csso-webpack-plugin
 ```

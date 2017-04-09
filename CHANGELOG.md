@@ -1,5 +1,15 @@
 # Change Log
 
+## 1.0-beta.3 (April 9, 2017)
+
+Release candidate N1
+
+* **Bugfix**: simple compilation config triggered success callback twice
+
+### Breaking changes
+* The `sourceMap:true` used `devtool` option if chunk detection unexpected
+* nodejs is **less than version 4** still can be used but **isn't tested now**.
+
 ## 1.0-beta.2 (March 31, 2017)
 
 Strict source map type from options

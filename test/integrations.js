@@ -9,6 +9,8 @@ const root = join(__dirname, 'integrations');
 const output = join(__dirname, '_out');
 
 describe('Integrations with webpack 2', function() {
+    this.timeout(5000);
+
     const cases = fs.readdirSync(root);
 
     rimraf.sync(output);

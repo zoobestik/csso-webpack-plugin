@@ -89,28 +89,35 @@ export default class CssoWebpackPlugin {
 
                         if (withSourceMap && map) {
                             let srcMapUrl;
-                            let isInline = optSourceMap === 'inline';
+                            let isInlineMap = optSourceMap === 'inline';
+                            let isHiddenMap = optSourceMap === 'hidden';
 
                             if (optSourceMap === true) {
                                 const inputMapComment = source.match(/\/\*# sourceMappingURL=(\S+)\s*\*\/\s*$/);
                                 const prevSourceMap = (inputMapComment && inputMapComment[1]) || '';
 
-                                if (prevSourceMap) {
-                                    if (prevSourceMap.startsWith('data:application/json;charset=utf-8;base64')) {
-                                        isInline = true;
+                                if (prevSourceMap.startsWith('data:application/json;charset=utf-8;base64')) {
+                                    isInlineMap = true;
+                                } else if (prevSourceMap) {
+                                    srcMapUrl = prevSourceMap;
+                                } else {
+                                    const devtool = compilation.options.devtool || '';
+
+                                    if (devtool.indexOf('inline') !== -1) {
+                                        isInlineMap = true;
                                     } else {
-                                        srcMapUrl = prevSourceMap;
+                                        isHiddenMap = devtool.indexOf('hidden') !== -1;
                                     }
                                 }
                             }
 
-                            if (isInline) {
+                            if (isInlineMap) {
                                 const base64 = new Buffer(map.toString()).toString('base64');
                                 out = new ConcatSource(out,
                                     sourceMapURL(`data:application/json;charset=utf-8;base64,${base64}`)
                                 );
                             } else {
-                                if (optSourceMap !== 'hidden') {
+                                if (!isHiddenMap) {
                                     css += sourceMapURL(srcMapUrl || `${file}.map`); // @ToDo: compilation.getPath
                                 }
 

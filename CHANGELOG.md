@@ -1,5 +1,11 @@
 # Change Log
 
+## 1.0-beta.4 (April 10, 2017)
+
+Release candidate N2
+
+* Add `output.sourceMapFilename` options support
+
 ## 1.0-beta.3 (April 9, 2017)
 
 Release candidate N1

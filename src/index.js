@@ -46,8 +46,8 @@ export default class CssoWebpackPlugin {
                 });
             }
 
-            compilation.plugin('optimize-assets', (assets, callback) => {
-                async.forEach(Object.keys(assets), file => {
+            compilation.plugin('optimize-assets', (assets, done) => {
+                async.forEach(Object.keys(assets), (file, callback) => {
                     try {
                         if (!this.filter(file)) {
                             return callback();
@@ -134,7 +134,7 @@ export default class CssoWebpackPlugin {
                     }
 
                     return callback();
-                });
+                }, done);
             });
         });
     }

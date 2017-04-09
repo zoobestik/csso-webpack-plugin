@@ -2,9 +2,9 @@
 [![npm][npm]][npm-url]
 [![node][node]][node-url]
 [![dependencies](https://img.shields.io/david/zoobestik/csso-webpack-plugin.svg)](https://david-dm.org/zoobestik/csso-webpack-plugin)
-[![devDependencies](https://img.shields.io/david/dev/zoobestik/csso-webpack-plugin.svg)](https://david-dm.org/zoobestik/csso-webpack-plugin#info=devDependencies)
 [![status](https://travis-ci.org/zoobestik/csso-webpack-plugin.svg)](https://travis-ci.org/zoobestik/csso-webpack-plugin)
- 
+![downloads](https://img.shields.io/npm/dm/csso-webpack-plugin.svg)
+
  **Why is not [csso-loader](https://www.npmjs.com/package/csso-loader) or [postcss-csso](https://github.com/lahmatiy/postcss-csso)?**
  * **[Full restructuring](https://rawgithub.com/zoobestik/csso-webpack-plugin/dev/docs/img/better-full.svg)** in bundles:
  ![better](https://rawgithub.com/zoobestik/csso-webpack-plugin/dev/docs/img/better.svg)

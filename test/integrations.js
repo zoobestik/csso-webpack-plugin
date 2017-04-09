@@ -20,7 +20,7 @@ describe('Integrations with webpack 2', function() {
                 const testDirectory = join(root, testCase);
                 const configFile = join(testDirectory, 'webpack.config.js');
 
-                let options = getWebpackConfig({
+                var options = getWebpackConfig({
                     outputDirectory: outputDirectory,
                     testDirectory: testDirectory
                 });

@@ -16,17 +16,21 @@ export default class CssoWebpackPlugin {
         this.options = options;
         this.filter = filter;
 
-        if (isFilterType(this.options) && typeof this.filter === 'undefined') {
+        if (isFilterType(options) && filter === undefined) {
             this.filter = options;
             this.options = undefined;
         }
 
-        if (typeof this.filter === 'undefined') {
+        if (this.filter === undefined) {
             this.filter = filterDefault;
         }
 
+        if (this.filter instanceof RegExp) {
+            this.filter = createRegexpFilter(this.filter);
+        }
+
         if (typeof this.filter !== 'function') {
-            this.filter = createRegexpFilter(filter);
+            throw new Error('filter should be one of these types: function, regexp, undefined');
         }
 
         this.options = this.options || {

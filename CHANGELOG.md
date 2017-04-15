@@ -1,5 +1,11 @@
 # Change Log
 
+## 1.0-beta.5 (April 15, 2017)
+
+Release candidate N3
+
+* Fix issue with regexp filters
+
 ## 1.0-beta.4 (April 10, 2017)
 
 Release candidate N2

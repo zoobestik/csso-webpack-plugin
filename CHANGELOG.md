@@ -1,5 +1,11 @@
 # Change Log
 
+## 1.0-beta.6 (April 17, 2017)
+
+Release candidate N4
+
+* **trivial**. Provide typings for Flow and Typescript
+
 ## 1.0-beta.5 (April 15, 2017)
 
 Release candidate N3

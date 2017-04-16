@@ -42,6 +42,13 @@ Arguments:
 * `options.sourceMap` – type of source map *"inline"*, *"hidden"*, *"source-map"* or *true* (detect automatically). Default: *false*.
 * `filter` — Detect should be file processed. Defaults: *to ends with `.css`*.
 
+## Flow support
+I don't now why, but plugin ships with flow typings (*typedef too*). To use them in your project, add this to the `[libs]` section of your `.flowconfig`:
+```
+[libs]
+node_modules/csso-webpack-plugin/lib/index.js.flow
+```
+
 ## Acknowledgements
 [![Develop By](https://img.shields.io/badge/develop%20by-zoobestik-blue.svg?style=flat)](https://ru.linkedin.com/in/kbchernenko) [![MIT license](https://img.shields.io/badge/license-MIT-brightgreen.svg)](http://opensource.org/licenses/MIT)
 

@@ -33,7 +33,8 @@
     "lint": "eslint --cache .",
     "lint-and-tests": "npm run lint && npm run itest",
     "test": "npm run lint-and-tests",
-    "build": "babel src --out-dir lib",
+    "build": "babel src --out-dir lib && npm run flow-types-gen",
+    "flow-types-gen": "typedef-converter --global -o lib/index.js.flow lib/index.d.ts",
     "prepublish": "npm run build"
   },
   "precommit": [
@@ -45,6 +46,7 @@
     "LICENSE",
     "README.md"
   ],
+  "typings": "lib/index.d.ts",
   "dependencies": {
     "async": "^2.3.0",
     "csso": "^3.0.1",
@@ -64,6 +66,7 @@
     "mocha": "^3.2.0",
     "pre-commit": "^1.2.2",
     "rimraf": "^2.6.1",
+    "typedef-converter": "^0.1.4",
     "webpack": "^2.3.3"
   }
 }

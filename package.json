@@ -45,6 +45,7 @@
     "LICENSE",
     "README.md"
   ],
+  "typings": "lib/index.d.ts",
   "dependencies": {
     "async": "^2.3.0",
     "csso": "^3.0.1",

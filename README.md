@@ -34,7 +34,7 @@ module.exports = {
 ## Options
 
 ```js
-new CSSOCompressPlugin([options: CssoOptions], [filter: function | RegExp])
+new CssoWebpackPlugin([options: CssoOptions], [filter: function | RegExp])
 ```
 
 Arguments:

@@ -1,5 +1,12 @@
 # Change Log
 
+## 1.0.0-beta.7 (June 3, 2017)
+
+Release candidate N5:
+
+* Trivial; strict 0.10 node version
+* Update-to-date dependencies versions
+
 ## 1.0-beta.6 (April 17, 2017)
 
 Release candidate N4

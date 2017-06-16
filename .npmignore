@@ -2,6 +2,7 @@
 !lib
 !lib/**
 !CHANGELOG.md
+!CONTRIBUTING.md
 !LICENSE
 !README.md
 !yarn.lock

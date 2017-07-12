@@ -11,6 +11,20 @@ const isFilterType = inst => typeof inst === 'function' || inst instanceof RegEx
 
 const sourceMapURL = content => `\n/*# sourceMappingURL=${content} */`;
 
+const getUsage = (options, ...args) => {
+    const usage = { ...(options.usage || {}) };
+
+    let scopes = usage.scopes || [];
+
+    if (typeof scopes === 'function') {
+        scopes = scopes(...args);
+    }
+
+    usage.scopes = scopes;
+
+    return usage;
+};
+
 export default class CssoWebpackPlugin {
     constructor(options, filter) {
         this.options = options;
@@ -34,20 +48,9 @@ export default class CssoWebpackPlugin {
         }
 
         this.options = {
-            usage: {},
             sourceMap: false,
             ...(this.options || {}),
         };
-    }
-
-    getScopes(...args) {
-        const scopes = this.options.usage.scopes || [];
-
-        if (typeof scopes === 'function') {
-            return scopes(...args);
-        }
-
-        return scopes;
     }
 
     apply(compiler) {
@@ -89,10 +92,7 @@ export default class CssoWebpackPlugin {
 
                         let { css, map } = csso.minify(source, { // eslint-disable-line prefer-const
                             ...options,
-                            usage: {
-                                ...options.usage,
-                                scopes: this.getScopes(source, file),
-                            },
+                            usage: getUsage(options, source, file),
                             filename: file,
                             sourceMap: withSourceMap,
                         });
@@ -173,3 +173,5 @@ export default class CssoWebpackPlugin {
         });
     }
 }
+
+CssoWebpackPlugin.getUsage = getUsage;

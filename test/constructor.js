@@ -3,10 +3,7 @@ const CssoWebpackPlugin = require('../lib').default;
 
 describe('Constructor', function() {
     const getDefaultOptions = function() {
-        return {
-            sourceMap: false,
-            usage: {}
-        };
+        return { sourceMap: false };
     };
 
     function testDefaultOptions(plugin) {

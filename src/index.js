@@ -11,6 +11,20 @@ const isFilterType = inst => typeof inst === 'function' || inst instanceof RegEx
 
 const sourceMapURL = content => `\n/*# sourceMappingURL=${content} */`;
 
+const getUsage = (options, ...args) => {
+    const usage = { ...(options.usage || {}) };
+
+    let scopes = usage.scopes || [];
+
+    if (typeof scopes === 'function') {
+        scopes = scopes(...args);
+    }
+
+    usage.scopes = scopes;
+
+    return usage;
+};
+
 export default class CssoWebpackPlugin {
     constructor(options, filter) {
         this.options = options;
@@ -33,8 +47,9 @@ export default class CssoWebpackPlugin {
             throw new Error('filter should be one of these types: function, regexp, undefined');
         }
 
-        this.options = this.options || {
+        this.options = {
             sourceMap: false,
+            ...(this.options || {}),
         };
     }
 
@@ -77,6 +92,7 @@ export default class CssoWebpackPlugin {
 
                         let { css, map } = csso.minify(source, { // eslint-disable-line prefer-const
                             ...options,
+                            usage: getUsage(options, source, file),
                             filename: file,
                             sourceMap: withSourceMap,
                         });
@@ -157,3 +173,5 @@ export default class CssoWebpackPlugin {
         });
     }
 }
+
+CssoWebpackPlugin.getUsage = getUsage;

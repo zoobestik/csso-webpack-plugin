@@ -33,8 +33,11 @@ export default class CssoWebpackPlugin {
             throw new Error('filter should be one of these types: function, regexp, undefined');
         }
 
-        this.options = this.options || {
+        if (!this.options) this.options = {};
+
+        this.options = {
             sourceMap: false,
+            ...this.options,
         };
     }
 

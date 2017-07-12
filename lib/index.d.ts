@@ -1,5 +1,11 @@
 declare module 'csso-webpack-plugin' {
-    type PluginOptions = any;
+    type PluginOptions = {
+        [key: string]: any,
+        usage: {
+            [key: string]: any,
+            scopes: (css: string, filename: string) => string[] | string[][];
+        }
+    };
     type PluginFilterFn = (file: string) => boolean;
     type PluginFilter = PluginFilterFn | RegExp;
 

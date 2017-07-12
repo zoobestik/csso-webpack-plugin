@@ -40,6 +40,26 @@ new CssoWebpackPlugin([options: CssoOptions], [filter: function | RegExp])
 Arguments:
 * `options` — [csso options](https://github.com/css/csso#minifysource-options).
 * `options.sourceMap` – type of source map *"inline"*, *"hidden"*, *"source-map"* or *true* (detect automatically). Default: *false*.
+* `options.usage.scopes` – array or function for generate custom scopes. Default: *[]*.
+Example for use with [babel-plugin-react-css-modules](https://github.com/gajus/babel-plugin-react-css-modules):
+```javascript
+(inputCss: string, filename: string) => {
+    const scopes = {};
+
+    inputCss.match(/\.(.*?)___(.*?)___[a-zA-Z0-9]+/g).forEach((className) => {
+        const moduleId = className.split('___').slice(0, 2).join('___');
+
+        if (!scopes[moduleId]) {
+            scopes[moduleId] = [];
+        }
+
+        scopes[moduleId].push(className);
+    });
+
+    return Object.values(scopes);
+}
+```
+
 * `filter` — Detect should be file processed. Defaults: *to ends with `.css`*.
 
 ## Flow support

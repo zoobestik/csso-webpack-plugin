@@ -2,8 +2,15 @@ const assert = require('assert');
 const CssoWebpackPlugin = require('../lib').default;
 
 describe('Constructor', function() {
+    const getDefaultOptions = function() {
+        return {
+            sourceMap: false,
+            usage: {}
+        };
+    };
+
     function testDefaultOptions(plugin) {
-        assert.deepEqual(plugin.options, {sourceMap: false}, 'default options inited');
+        assert.deepEqual(plugin.options, getDefaultOptions(), 'default options inited');
     }
 
     function testDefaultFilter(plugin) {
@@ -21,7 +28,8 @@ describe('Constructor', function() {
     it('with options', function() {
         const options = { test: 1 };
         const plugin = new CssoWebpackPlugin(options);
-        assert.equal(plugin.options, options, 'single argument with options');
+        assert.notEqual(plugin.options, options);
+        assert.deepEqual(plugin.options, Object.assign({}, getDefaultOptions(), options), 'single argument with options');
         testDefaultFilter(plugin);
     });
 

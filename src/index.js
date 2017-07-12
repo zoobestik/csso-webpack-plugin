@@ -33,9 +33,21 @@ export default class CssoWebpackPlugin {
             throw new Error('filter should be one of these types: function, regexp, undefined');
         }
 
-        this.options = this.options || {
+        this.options = {
+            usage: {},
             sourceMap: false,
+            ...(this.options || {}),
         };
+    }
+
+    getScopes(...args) {
+        const scopes = this.options.usage.scopes || [];
+
+        if (typeof scopes === 'function') {
+            return scopes(...args);
+        }
+
+        return scopes;
     }
 
     apply(compiler) {
@@ -77,6 +89,10 @@ export default class CssoWebpackPlugin {
 
                         let { css, map } = csso.minify(source, { // eslint-disable-line prefer-const
                             ...options,
+                            usage: {
+                                ...options.usage,
+                                scopes: this.getScopes(source, file),
+                            },
                             filename: file,
                             sourceMap: withSourceMap,
                         });

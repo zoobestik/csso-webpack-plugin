@@ -9,4 +9,10 @@ declare module 'csso-webpack-plugin' {
 
         public constructor(options?: PluginOptions, filter?: PluginFilter);
     }
+
+    type PluginPresets = {
+        scopeByClass: (getModuleID: (className: string) => string) => (options?: PluginOptions) => PluginOptions
+    };
+
+    export const presets: PluginPresets;
 }

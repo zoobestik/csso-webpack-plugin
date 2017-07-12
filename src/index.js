@@ -4,6 +4,7 @@ import RawSource from 'webpack-sources/lib/RawSource';
 import ConcatSource from 'webpack-sources/lib/ConcatSource';
 import SourceMapSource from 'webpack-sources/lib/SourceMapSource';
 import { SourceMapConsumer } from 'source-map';
+import * as configPresets from './presets';
 
 const filterDefault = file => file.endsWith('.css');
 const createRegexpFilter = regex => str => regex.test(str);
@@ -160,3 +161,5 @@ export default class CssoWebpackPlugin {
         });
     }
 }
+
+export const presets = configPresets;

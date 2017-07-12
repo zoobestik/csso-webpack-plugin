@@ -42,6 +42,10 @@ Arguments:
 * `options.sourceMap` – type of source map *"inline"*, *"hidden"*, *"source-map"* or *true* (detect automatically). Default: *false*.
 * `filter` — Detect should be file processed. Defaults: *to ends with `.css`*.
 
+## Presets
+
+Plugin has [preset for scopes generate](docs/presets.md#scopes)
+
 ## Flow support
 I don't now why, but plugin ships with flow typings (*typedef too*). To use them in your project, add this to the `[libs]` section of your `.flowconfig`:
 ```

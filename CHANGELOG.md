@@ -1,5 +1,13 @@
 # Change Log
 
+## 1.0.0-beta.8 (August 28, 2017)
+
+Release candidate N6:
+
+* Update-to-date dependencies versions
+* **BREAKING**: `options.sourceMap` is deprecate and should be removed from config.
+  For getting source map just use any value [`devtool`](https://webpack.js.org/configuration/devtool/#devtool).
+
 ## 1.0.0-beta.7 (June 3, 2017)
 
 Release candidate N5:

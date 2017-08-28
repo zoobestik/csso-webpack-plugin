@@ -1,4 +1,4 @@
-# CSSO Compression Plugin
+# CSSO Webpack Plugin
 [![npm][npm]][npm-url]
 [![node][node]][node-url]
 [![dependencies](https://img.shields.io/david/zoobestik/csso-webpack-plugin.svg)](https://david-dm.org/zoobestik/csso-webpack-plugin)
@@ -23,7 +23,6 @@ Plugin good to use in pair with [ExtractTextPlugin](https://github.com/webpack-c
 const CssoWebpackPlugin = require('csso-webpack-plugin').default;
 
 module.exports = {
-  devtool: 'source-map',
   module: { /* ... */ },
   plugins: [
     new ExtractTextPlugin('[name].css'),

@@ -6,6 +6,6 @@ module.exports = {
         sourceMapFilename: 'prefix-[file]-[id]-[hash].map[query]'
     },
     plugins: [
-        new CssoWebpackPlugin({ sourceMap: 'source-map' }),
+        new CssoWebpackPlugin(),
     ]
 };

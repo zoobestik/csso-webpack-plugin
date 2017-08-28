@@ -1,8 +1,8 @@
 const CssoWebpackPlugin = require('../../../lib').default;
 
 module.exports = {
-    devtool: 'source-map',
+    devtool: 'inline-source-map',
     plugins: [
-        new CssoWebpackPlugin({ sourceMap: 'inline' }),
+        new CssoWebpackPlugin(),
     ]
 };

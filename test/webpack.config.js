@@ -6,7 +6,7 @@ const styleExtractPlugin = new ExtractTextPlugin({
     allChunks: false,
 });
 
-module.exports = function(options) {
+module.exports = function (options) {
     return {
         entry: {
             test: './index.js'

@@ -3,7 +3,7 @@ const CssoWebpackPlugin = require('../lib').default;
 
 describe('Constructor', function() {
     function testDefaultOptions(plugin) {
-        assert.deepEqual(plugin.options, {sourceMap: false}, 'default options inited');
+        assert.deepEqual(plugin.options, {}, 'default options inited');
     }
 
     function testDefaultFilter(plugin) {

@@ -1,5 +1,13 @@
 # Change Log
 
+
+## 1.0.0-beta.9 (October 17, 2017)
+
+Release candidate N7:
+
+* **csso** 3.2.0 -> 3.3.0 by default
+* Update-to-date dev-dependencies versions
+
 ## 1.0.0-beta.8 (August 28, 2017)
 
 Release candidate N6:

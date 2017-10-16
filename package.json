@@ -1,6 +1,6 @@
 {
   "name": "csso-webpack-plugin",
-  "version": "1.0.0-beta.8",
+  "version": "1.0.0-beta.9",
   "author": "zoobestik <kb.chernenko@gmail.com>",
   "description": "CSSO minification files to serve your webpack bundles",
   "homepage": "https://github.com/zoobestik/csso-webpack-plugin",

@@ -1,5 +1,12 @@
 # Change Log
 
+## 1.0.0-beta.10 (November 4, 2017)
+
+Release candidate N8:
+
+* Add new option for two different files — [`pluginOutputPostfix`](https://github.com/zoobestik/csso-webpack-plugin/commit/7da22c9c34c2172148049912589b507d7309a852#diff-04c6e90faac2675aa89e2176d2eec7d8R42)
+* **csso** 3.3.0 -> 3.4.0 by default
+* Update-to-date dev-dependencies versions
 
 ## 1.0.0-beta.9 (October 17, 2017)
 

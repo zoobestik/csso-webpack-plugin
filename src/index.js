@@ -86,8 +86,7 @@ export default class CssoWebpackPlugin {
                                 compilation.warnings.push(new Error('CssoWebpackPlugin: ' +
                                     '“sourceMap” option is DEPRECATED. ' +
                                     'Use webpack “devtool” instead.\n\tFor more info about the usage see ' +
-                                    'https://github.com/zoobestik/csso-webpack-plugin/releases/tag/v1.0.0-beta.8'
-                                ));
+                                    'https://github.com/zoobestik/csso-webpack-plugin/releases/tag/v1.0.0-beta.8'));
                             }
 
                             let fileOutput = file;

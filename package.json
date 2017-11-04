@@ -49,18 +49,18 @@
   "typings": "lib/index.d.ts",
   "dependencies": {
     "async": "^2.5.0",
-    "csso": "^3.3.0",
+    "csso": "^3.4.0",
     "source-map": "^0.6.1",
     "webpack-sources": "^1.0.1"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
-    "babel-eslint": "^7.2.3",
+    "babel-eslint": "^8.0.0",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-preset-env": "^1.6.0",
     "css-loader": "^0.28.5",
     "eslint": "^4.9.0",
-    "eslint-config-airbnb-base": "^11.3.2",
+    "eslint-config-airbnb-base": "^12.1.0",
     "eslint-plugin-import": "^2.7.0",
     "extract-text-webpack-plugin": "^2.1.0",
     "flowgen": "^1.2.0",

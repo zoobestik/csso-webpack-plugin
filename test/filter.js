@@ -21,7 +21,8 @@ describe('Constructor', function() {
     it('with options', function() {
         const options = { test: 1 };
         const plugin = new CssoWebpackPlugin(options);
-        assert.equal(plugin.options, options, 'single argument with options');
+        assert.deepEqual(plugin.options, { test: 1 }, 'single argument with options');
+        assert.deepEqual(options, { test: 1 }, 'single argument with options immutable');
         testDefaultFilter(plugin);
     });
 

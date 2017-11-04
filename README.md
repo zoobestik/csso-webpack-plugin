@@ -39,6 +39,20 @@ new CssoWebpackPlugin([options: CssoOptions], [filter: function | RegExp])
 
 Arguments:
 * `options` — [csso options](https://github.com/css/csso#minifysource-options).
+* `options.pluginOutputPostfix` — *function(file)* or *string postfix*, if passed, plugin will create two assets vanilla and compressed.
+   Example:
+   ```javascript
+   {
+       plugins: [
+           new ExtractTextPlugin('test.css'),
+           new CssoWebpackPlugin({ pluginOutputPostfix: 'min' })
+           /* Generated:
+               test.css — uncompressed file
+               test.min.css — minimized with csso file
+           */
+       ]
+   }
+   ```
 * `filter` — Detect should be file processed. Defaults: *to ends with `.css`*.
 
 ## Flow support

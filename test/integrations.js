@@ -39,16 +39,33 @@ describe('Integrations with webpack 2', function() {
                     if (err) return reject(err);
                     if (stats.hasErrors()) return reject(new Error(stats.toString()));
 
-                    const actual = fs.readFileSync(join(outputDirectory, 'test.css'), 'utf-8');
-                    const expected = fs.readFileSync(join(testDirectory, 'expected.css'), 'utf-8')
-                        .replace(/\n$/g, '')
-                        .replace(/%%unit-hash%%/g, stats.hash);
+                    const expectedCssExt = 'expected.css';
 
-                    assert.equal(actual, expected,
-                        'Output ' + testCase + '/test.css file isn\'t equals ' + testCase + '/expected.css'
-                    );
+                    fs.readdir(testDirectory, function(err, files) {
+                        if (err) return reject(err);
 
-                    resolve();
+                        files = files.filter(name => name.endsWith(expectedCssExt));
+
+                        assert.ok(files.length > 0, 'Integration test should be with css file');
+
+                        files.forEach(name => {
+                            const prefix = name.substring(0, name.length - expectedCssExt.length) || '';
+                            const actualName = 'test.' + prefix + 'css';
+
+                            const actual = fs.readFileSync(join(outputDirectory, actualName), 'utf-8')
+                                .replace(/\n$/g, '');
+
+                            const expected = fs.readFileSync(join(testDirectory, name), 'utf-8')
+                                .replace(/\n$/g, '')
+                                .replace(/%%unit-hash%%/g, stats.hash);
+
+                            assert.equal(actual, expected,
+                                'Output ' + testCase + ' — ' + name + ' file isn\'t equals ${actualName}'
+                            );
+                        });
+
+                        resolve();
+                    });
                 });
             });
         });

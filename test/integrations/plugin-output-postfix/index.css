@@ -1,0 +1,3 @@
+.a:global(.c .d) { color: #fff; }
+:global(.c .d) { color: white; }
+.c .d { color: #ffffff; }

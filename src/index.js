@@ -1,3 +1,4 @@
+import path from 'path';
 import csso from 'csso';
 import async from 'async';
 import RawSource from 'webpack-sources/lib/RawSource';
@@ -8,13 +9,23 @@ const filterDefault = file => file.endsWith('.css');
 const createRegexpFilter = regex => str => regex.test(str);
 const isFilterType = inst => typeof inst === 'function' || inst instanceof RegExp;
 
-export default class CssoWebpackPlugin {
-    constructor(options, filter) {
-        this.options = options;
-        this.filter = filter;
+const getOutputAssetFilename = postfix => file => {
+    const parsed = path.parse(file);
+    parsed.ext = `.${postfix}${parsed.ext}`;
+    /* `base` for node <= 4 version required:
+     *   https://travis-ci.org/zoobestik/csso-webpack-plugin/jobs/296380161#L525 */
+    parsed.base = `${parsed.name}${parsed.ext}`;
+    return path.format(parsed);
+};
 
-        if (isFilterType(options) && filter === undefined) {
-            this.filter = options;
+export default class CssoWebpackPlugin {
+    constructor(opts, filter) {
+        this.options = opts;
+        this.filter = filter;
+        this.pluginOutputPostfix = null;
+
+        if (isFilterType(opts) && filter === undefined) {
+            this.filter = opts;
             this.options = undefined;
         }
 
@@ -30,7 +41,15 @@ export default class CssoWebpackPlugin {
             throw new Error('filter should be one of these types: function, regexp, undefined');
         }
 
-        this.options = this.options || {};
+        const { pluginOutputPostfix, ...options } = this.options || {};
+
+        if (pluginOutputPostfix) {
+            this.pluginOutputPostfix = typeof pluginOutputPostfix === 'function' ?
+                pluginOutputPostfix :
+                getOutputAssetFilename(pluginOutputPostfix);
+        }
+
+        this.options = options;
     }
 
     apply(compiler) {
@@ -71,22 +90,28 @@ export default class CssoWebpackPlugin {
                                 ));
                             }
 
+                            let fileOutput = file;
+
+                            if (this.pluginOutputPostfix) {
+                                fileOutput = this.pluginOutputPostfix(file);
+                            }
+
                             let { css, map } = csso.minify(source, { // eslint-disable-line prefer-const
                                 ...options,
-                                filename: file,
+                                filename: fileOutput,
                                 sourceMap: Boolean(compiler.options.devtool),
                             });
 
                             if (map && sourceMap) {
-                                map.applySourceMap(new SourceMapConsumer(sourceMap), file);
+                                map.applySourceMap(new SourceMapConsumer(sourceMap), fileOutput);
                             }
 
                             if (!map) {
                                 map = sourceMap;
                             }
 
-                            compilation.assets[file] = map ?
-                                new SourceMapSource(css, file, map.toJSON ? map.toJSON() : map) :
+                            compilation.assets[fileOutput] = map ?
+                                new SourceMapSource(css, fileOutput, map.toJSON ? map.toJSON() : map) :
                                 new RawSource(css);
                         } catch (err) {
                             let error = err;

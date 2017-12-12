@@ -10,7 +10,9 @@
  ![better](https://rawgithub.com/zoobestik/csso-webpack-plugin/dev/docs/img/better.svg)
  
  * No problems with custom syntax like **css-modules** – `:global(.c .d) .a { color: #fff; }`
- <img src="https://rawgithub.com/zoobestik/csso-webpack-plugin/dev/docs/img/css-modules.png" width="320" alt="syntax">
+   <img src="https://rawgithub.com/zoobestik/csso-webpack-plugin/dev/docs/img/css-modules.png" width="320" alt="syntax">
+ 
+ * Possible to generate both **pure and minimized** versions [at the same time](#options).
 
 ## Install
 ```bash

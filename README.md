@@ -3,7 +3,7 @@
 [![node][node]][node-url]
 [![dependencies](https://img.shields.io/david/zoobestik/csso-webpack-plugin.svg)](https://david-dm.org/zoobestik/csso-webpack-plugin)
 [![status](https://travis-ci.org/zoobestik/csso-webpack-plugin.svg?branch=master)](https://travis-ci.org/zoobestik/csso-webpack-plugin)
-![downloads](https://img.shields.io/npm/dm/csso-webpack-plugin.svg)
+[![downloads](https://img.shields.io/npm/dm/csso-webpack-plugin.svg)](http://npm-stats.com/~packages/csso-webpack-plugin)
 
  **Why is not [csso-loader](https://www.npmjs.com/package/csso-loader) or [postcss-csso](https://github.com/lahmatiy/postcss-csso)?**
  * **[Full restructuring](https://rawgithub.com/zoobestik/csso-webpack-plugin/dev/docs/img/better-full.svg)** in bundles:
@@ -20,7 +20,7 @@ npm i -D csso-webpack-plugin
 ```
 
 ## Usage
-Plugin good to use in pair with [ExtractTextPlugin](https://github.com/webpack-contrib/extract-text-webpack-plugin).
+Plugin good to use in pair with [ExtractTextPlugin](https://github.com/webpack-contrib/extract-text-webpack-plugin) or [MiniCssExtractPlugin](https://github.com/webpack-contrib/mini-css-extract-plugin).
 ```js
 const CssoWebpackPlugin = require('csso-webpack-plugin').default;
 

@@ -1,5 +1,14 @@
 # Change Log
 
+## 1.0.0-beta.11 (April 4, 2018)
+
+Release candidate N9:
+
+* Fix warning with webpack 4.x (thanks for [@the-spyke](https://github.com/the-spyke)):
+```
+DeprecationWarning: Tapable.plugin is deprecated. Use new API on `.hooks` instead
+```
+
 ## 1.0.0-beta.10 (November 4, 2017)
 
 Release candidate N8:

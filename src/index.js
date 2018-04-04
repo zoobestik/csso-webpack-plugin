@@ -18,6 +18,21 @@ const getOutputAssetFilename = postfix => file => {
     return path.format(parsed);
 };
 
+
+/*
+    New webpack 4 API,
+    for webpack 2-3 compatibility used .plugin('...', cb)
+ */
+const unCamelCase = str => str.replace(/[A-Z]/g, letter => `-${letter.toLowerCase()}`);
+
+const pluginCompatibility = (caller, hook, cb) => {
+    if (caller.hooks) {
+        caller.hooks[hook].tap('csso-webpack-plugin', cb);
+    } else {
+        caller.plugin(unCamelCase(hook), cb);
+    }
+};
+
 export default class CssoWebpackPlugin {
     constructor(opts, filter) {
         this.options = opts;
@@ -53,10 +68,10 @@ export default class CssoWebpackPlugin {
     }
 
     apply(compiler) {
-        compiler.plugin('compilation', compilation => {
+        pluginCompatibility(compiler, 'compilation', compilation => {
             const options = this.options;
 
-            compilation.plugin('optimize-chunk-assets', (chunks, done) => {
+            pluginCompatibility(compilation, 'optimizeChunkAssets', (chunks, done) => {
                 async.forEach(chunks, (chunk, chunked) => {
                     async.forEach(chunk.files, (file, callback) => {
                         try {

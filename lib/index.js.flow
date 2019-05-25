@@ -1,0 +1,10 @@
+declare module 'csso-webpack-plugin' {
+    declare type PluginOptions = any;
+    declare type PluginFilterFn = (file: string) => boolean;
+    declare type PluginFilter = PluginFilterFn | RegExp;
+
+    declare export default class CssoWebpackPlugin {
+        constructor(options?: PluginOptions, filter?: PluginFilter): this;
+        apply(compiler: Compiler): void
+    }
+}

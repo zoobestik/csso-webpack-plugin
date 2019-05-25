@@ -59,9 +59,9 @@ export default class CssoWebpackPlugin {
         const { pluginOutputPostfix, ...options } = this.options || {};
 
         if (pluginOutputPostfix) {
-            this.pluginOutputPostfix = typeof pluginOutputPostfix === 'function' ?
-                pluginOutputPostfix :
-                getOutputAssetFilename(pluginOutputPostfix);
+            this.pluginOutputPostfix = typeof pluginOutputPostfix === 'function'
+                ? pluginOutputPostfix
+                : getOutputAssetFilename(pluginOutputPostfix);
         }
 
         this.options = options;
@@ -98,10 +98,10 @@ export default class CssoWebpackPlugin {
                             }
 
                             if (options.sourceMap !== undefined) {
-                                compilation.warnings.push(new Error('CssoWebpackPlugin: ' +
-                                    '“sourceMap” option is DEPRECATED. ' +
-                                    'Use webpack “devtool” instead.\n\tFor more info about the usage see ' +
-                                    'https://github.com/zoobestik/csso-webpack-plugin/releases/tag/v1.0.0-beta.8'));
+                                compilation.warnings.push(new Error('CssoWebpackPlugin: '
+                                    + '“sourceMap” option is DEPRECATED. '
+                                    + 'Use webpack “devtool” instead.\n\tFor more info about the usage see '
+                                    + 'https://github.com/zoobestik/csso-webpack-plugin/releases/tag/v1.0.0-beta.8'));
                             }
 
                             let fileOutput = file;
@@ -124,9 +124,9 @@ export default class CssoWebpackPlugin {
                                 map = sourceMap;
                             }
 
-                            compilation.assets[fileOutput] = map ?
-                                new SourceMapSource(css, fileOutput, map.toJSON ? map.toJSON() : map) :
-                                new RawSource(css);
+                            compilation.assets[fileOutput] = map
+                                ? new SourceMapSource(css, fileOutput, map.toJSON ? map.toJSON() : map)
+                                : new RawSource(css);
                         } catch (err) {
                             let error = err;
                             const prefix = `${file} from CssoWebpackPlugin\n`;

@@ -5,6 +5,8 @@
 [![status](https://travis-ci.org/zoobestik/csso-webpack-plugin.svg?branch=master)](https://travis-ci.org/zoobestik/csso-webpack-plugin)
 [![downloads](https://img.shields.io/npm/dm/csso-webpack-plugin.svg)](http://npm-stats.com/~packages/csso-webpack-plugin)
 
+<img src="https://rawgithub.com/zoobestik/csso-webpack-plugin/dev/docs/img/logo.jpg" width="195" alt="Logo">
+
  **Why is not [csso-loader](https://www.npmjs.com/package/csso-loader) or [postcss-csso](https://github.com/lahmatiy/postcss-csso)?**
  * **[Full restructuring](https://rawgithub.com/zoobestik/csso-webpack-plugin/dev/docs/img/better-full.svg)** in bundles:
  ![better](https://rawgithub.com/zoobestik/csso-webpack-plugin/dev/docs/img/better.svg)
@@ -65,7 +67,7 @@ node_modules/csso-webpack-plugin/lib/index.js.flow
 ```
 
 ## Acknowledgements
-[![Develop By](https://img.shields.io/badge/develop%20by-zoobestik-blue.svg?style=flat)](https://ru.linkedin.com/in/kbchernenko) [![MIT license](https://img.shields.io/badge/license-MIT-brightgreen.svg)](http://opensource.org/licenses/MIT)
+[![Develop By](https://img.shields.io/badge/develop%20by-zoobestik-blue.svg?style=flat)](https://ru.linkedin.com/in/kbchernenko) [![Develop By](https://img.shields.io/badge/designed%20by-@egorii-yellow.svg?style=flat)](https://www.linkedin.com/in/%D0%B5%D0%B3%D0%BE%D1%80-%D0%B0%D0%BB%D0%B5%D0%BA%D1%81%D0%B5%D0%B5%D0%B2-968a1265/) [![MIT license](https://img.shields.io/badge/license-MIT-brightgreen.svg)](http://opensource.org/licenses/MIT)
 
 [npm]: https://img.shields.io/npm/v/csso-webpack-plugin.svg
 [npm-url]: https://npmjs.com/package/csso-webpack-plugin

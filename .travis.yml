@@ -10,11 +10,22 @@ node_js:
   - "7"
   - "8"
   - "9"
+  - "10"
+  - "11"
+  - "12"
   - "node"
+
+script: npm test
 
 branches:
   except:
     - gh-pages
+
+jobs:
+  include:
+    - stage: npm lint
+      node_js: "node"
+      script: npm run lint
 
 notifications:
   email:

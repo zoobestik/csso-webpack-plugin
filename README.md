@@ -21,6 +21,11 @@
 npm i -D csso-webpack-plugin
 ```
 
+For **`node` < 8.0.0** use [1.x](https://github.com/zoobestik/csso-webpack-plugin/tree/v1) version with `csso@^3`:
+```bash
+npm i -D csso-webpack-plugin@1
+```
+
 ## Usage
 Plugin good to use in pair with [ExtractTextPlugin](https://github.com/webpack-contrib/extract-text-webpack-plugin) or [MiniCssExtractPlugin](https://github.com/webpack-contrib/mini-css-extract-plugin).
 ```js
@@ -29,7 +34,10 @@ const CssoWebpackPlugin = require('csso-webpack-plugin').default;
 module.exports = {
   module: { /* ... */ },
   plugins: [
-    new ExtractTextPlugin('[name].css'),
+    new MiniCssExtractPlugin({
+      filename: "[name].css",
+      chunkFilename: "[id].css"
+    }),
     new CssoWebpackPlugin(),
   ]
 }
@@ -67,7 +75,7 @@ node_modules/csso-webpack-plugin/lib/index.js.flow
 ```
 
 ## Acknowledgements
-[![Develop By](https://img.shields.io/badge/develop%20by-zoobestik-blue.svg?style=flat)](https://ru.linkedin.com/in/kbchernenko) [![Develop By](https://img.shields.io/badge/designed%20by-@egorii-yellow.svg?style=flat)](https://www.linkedin.com/in/%D0%B5%D0%B3%D0%BE%D1%80-%D0%B0%D0%BB%D0%B5%D0%BA%D1%81%D0%B5%D0%B5%D0%B2-968a1265/) [![MIT license](https://img.shields.io/badge/license-MIT-brightgreen.svg)](http://opensource.org/licenses/MIT)
+[![Develop By](https://img.shields.io/badge/develop%20by-zoobestik-blue.svg?style=flat)](https://ru.linkedin.com/in/kbchernenko) [![Logo By](https://img.shields.io/badge/logo%20by-@egorii-yellow.svg?style=flat)](https://www.linkedin.com/in/%D0%B5%D0%B3%D0%BE%D1%80-%D0%B0%D0%BB%D0%B5%D0%BA%D1%81%D0%B5%D0%B5%D0%B2-968a1265/) [![MIT license](https://img.shields.io/badge/license-MIT-brightgreen.svg)](http://opensource.org/licenses/MIT)
 
 [npm]: https://img.shields.io/npm/v/csso-webpack-plugin.svg
 [npm-url]: https://npmjs.com/package/csso-webpack-plugin

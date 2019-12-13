@@ -1,19 +1,11 @@
 {
     "presets": [
-        [ "env", {
+        [ "@babel/preset-env", {
             "targets": {
-                "node": "0.10"
+                "node": "8"
             },
             "loose": true,
-            "useBuiltIns": true
+            "useBuiltIns": "entry"
         } ]
-    ],
-    "plugins": [
-        [
-            "transform-object-rest-spread",
-            {
-                "useBuiltIns": true
-            }
-        ]
     ]
 }

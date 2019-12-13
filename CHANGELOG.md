@@ -1,5 +1,22 @@
 # Change Log
 
+## 2.0.0-beta.1 (December 12, 2019)
+
+Release candidate N2.1:
+
+ * Update for [CSSO 4](https://github.com/css/csso/releases/tag/v4.0.0)
+ * Drop maintenance for **NODE < 8.0.0** (see `csso v4` release notes, it's incompatible)
+ 
+Resolved:
+  [#15](https://github.com/zoobestik/csso-webpack-plugin/issues/15),
+  [#16](https://github.com/zoobestik/csso-webpack-plugin/issues/16),
+  [#22](https://github.com/zoobestik/csso-webpack-plugin/issues/22).
+ 
+ Chores:
+ * use native  `async/await` instead [async](https://www.npmjs.com/package/async)
+ * moved to [`source-map`](https://github.com/mozilla/source-map/blob/master/CHANGELOG.md#070) with support WEBAssembly
+ * Up-to-date dev-dependencies versions
+
 ## 1.0.0-beta.12 (April 4, 2018)
 
 Release candidate N9:

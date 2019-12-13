@@ -1,9 +1,10 @@
 # CSSO Webpack Plugin
-[![npm][npm]][npm-url]
-[![node][node]][node-url]
-[![dependencies](https://img.shields.io/david/zoobestik/csso-webpack-plugin.svg)](https://david-dm.org/zoobestik/csso-webpack-plugin)
-[![status](https://travis-ci.org/zoobestik/csso-webpack-plugin.svg?branch=master)](https://travis-ci.org/zoobestik/csso-webpack-plugin)
+[![node](https://img.shields.io/node/v/csso-webpack-plugin/1.0.0-beta.12)][node-url]
+[![dependencies](https://img.shields.io/librariesio/release/npm/csso-webpack-plugin/1.0.0-beta.12)](https://david-dm.org/zoobestik/csso-webpack-plugin)
+[![status](https://travis-ci.org/zoobestik/csso-webpack-plugin.svg?branch=v1)](https://travis-ci.org/zoobestik/csso-webpack-plugin)
 [![downloads](https://img.shields.io/npm/dm/csso-webpack-plugin.svg)](http://npm-stats.com/~packages/csso-webpack-plugin)
+
+## ATTENTION: v1.x IS DEPRECATED, see to [![npm][npm]][npm-url]
 
 <img src="https://rawgithub.com/zoobestik/csso-webpack-plugin/dev/docs/img/logo.jpg" width="195" alt="Logo">
 
@@ -18,7 +19,7 @@
 
 ## Install
 ```bash
-npm i -D csso-webpack-plugin
+npm i -D csso-webpack-plugin@1
 ```
 
 ## Usage

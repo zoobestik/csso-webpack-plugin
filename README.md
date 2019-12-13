@@ -21,6 +21,11 @@
 npm i -D csso-webpack-plugin
 ```
 
+For **`node` < 8.0.0** use [1.x](https://github.com/zoobestik/csso-webpack-plugin/tree/v1) version with `csso@^3`:
+```bash
+npm i -D csso-webpack-plugin@1
+```
+
 ## Usage
 Plugin good to use in pair with [ExtractTextPlugin](https://github.com/webpack-contrib/extract-text-webpack-plugin) or [MiniCssExtractPlugin](https://github.com/webpack-contrib/mini-css-extract-plugin).
 ```js
@@ -29,7 +34,10 @@ const CssoWebpackPlugin = require('csso-webpack-plugin').default;
 module.exports = {
   module: { /* ... */ },
   plugins: [
-    new ExtractTextPlugin('[name].css'),
+    new MiniCssExtractPlugin({
+      filename: "[name].css",
+      chunkFilename: "[id].css"
+    }),
     new CssoWebpackPlugin(),
   ]
 }

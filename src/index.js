@@ -1,6 +1,5 @@
 import path from 'path';
 import csso from 'csso';
-import async from 'async';
 import RawSource from 'webpack-sources/lib/RawSource';
 import SourceMapSource from 'webpack-sources/lib/SourceMapSource';
 import { SourceMapConsumer } from 'source-map';
@@ -12,12 +11,9 @@ const isFilterType = inst => typeof inst === 'function' || inst instanceof RegEx
 const getOutputAssetFilename = postfix => file => {
     const parsed = path.parse(file);
     parsed.ext = `.${postfix}${parsed.ext}`;
-    /* `base` for node <= 4 version required:
-     *   https://travis-ci.org/zoobestik/csso-webpack-plugin/jobs/296380161#L525 */
     parsed.base = `${parsed.name}${parsed.ext}`;
     return path.format(parsed);
 };
-
 
 /*
     New webpack 4 API,
@@ -25,13 +21,11 @@ const getOutputAssetFilename = postfix => file => {
  */
 const unCamelCase = str => str.replace(/[A-Z]/g, letter => `-${letter.toLowerCase()}`);
 
-const pluginCompatibility = (caller, hook, cb) => {
-    if (caller.hooks) {
-        caller.hooks[hook].tap('csso-webpack-plugin', cb);
-    } else {
-        caller.plugin(unCamelCase(hook), cb);
-    }
-};
+const pluginCompatibility = (caller, hook, tapAction, cb) => (
+    caller.hooks
+        ? caller.hooks[hook][tapAction]('csso-webpack-plugin', cb)
+        : caller.plugin(unCamelCase(hook), cb)
+);
 
 export default class CssoWebpackPlugin {
     constructor(opts, filter) {
@@ -59,25 +53,24 @@ export default class CssoWebpackPlugin {
         const { pluginOutputPostfix, ...options } = this.options || {};
 
         if (pluginOutputPostfix) {
-            this.pluginOutputPostfix = typeof pluginOutputPostfix === 'function' ?
-                pluginOutputPostfix :
-                getOutputAssetFilename(pluginOutputPostfix);
+            this.pluginOutputPostfix = typeof pluginOutputPostfix === 'function'
+                ? pluginOutputPostfix
+                : getOutputAssetFilename(pluginOutputPostfix);
         }
 
         this.options = options;
     }
 
     apply(compiler) {
-        pluginCompatibility(compiler, 'compilation', compilation => {
+        pluginCompatibility(compiler, 'compilation', 'tap', compilation => {
             const options = this.options;
+            const { pluginOutputPostfix } = this;
 
-            pluginCompatibility(compilation, 'optimizeChunkAssets', (chunks, done) => {
-                async.forEach(chunks, (chunk, chunked) => {
-                    async.forEach(chunk.files, (file, callback) => {
+            const doChunks = async chunks => Promise.all(
+                chunks.map(chunk => Promise.all(
+                    chunk.files.map(async file => {
                         try {
-                            if (!this.filter(file)) {
-                                return callback();
-                            }
+                            if (!this.filter(file)) { return; }
 
                             let source;
                             let sourceMap;
@@ -98,16 +91,16 @@ export default class CssoWebpackPlugin {
                             }
 
                             if (options.sourceMap !== undefined) {
-                                compilation.warnings.push(new Error('CssoWebpackPlugin: ' +
-                                    '“sourceMap” option is DEPRECATED. ' +
-                                    'Use webpack “devtool” instead.\n\tFor more info about the usage see ' +
-                                    'https://github.com/zoobestik/csso-webpack-plugin/releases/tag/v1.0.0-beta.8'));
+                                compilation.warnings.push(new Error('CssoWebpackPlugin: '
+                                    + '“sourceMap” option is DEPRECATED. '
+                                    + 'Use webpack “devtool” instead.\n\tFor more info about the usage see '
+                                    + 'https://github.com/zoobestik/csso-webpack-plugin/releases/tag/v1.0.0-beta.8'));
                             }
 
                             let fileOutput = file;
 
-                            if (this.pluginOutputPostfix) {
-                                fileOutput = this.pluginOutputPostfix(file);
+                            if (pluginOutputPostfix) {
+                                fileOutput = pluginOutputPostfix(file);
                             }
 
                             let { css, map } = csso.minify(source, { // eslint-disable-line prefer-const
@@ -117,33 +110,37 @@ export default class CssoWebpackPlugin {
                             });
 
                             if (map && sourceMap) {
-                                map.applySourceMap(new SourceMapConsumer(sourceMap), fileOutput);
+                                const consumerMap = await new SourceMapConsumer(sourceMap);
+                                map.applySourceMap(consumerMap, fileOutput);
                             }
 
                             if (!map) {
                                 map = sourceMap;
                             }
 
-                            compilation.assets[fileOutput] = map ?
-                                new SourceMapSource(css, fileOutput, map.toJSON ? map.toJSON() : map) :
-                                new RawSource(css);
+                            compilation.assets[fileOutput] = map
+                                ? new SourceMapSource(css, fileOutput, map.toJSON ? map.toJSON() : map)
+                                : new RawSource(css);
                         } catch (err) {
-                            let error = err;
                             const prefix = `${file} from CssoWebpackPlugin\n`;
                             const { message, parseError, stack } = err;
+                            let error = `${message} ${stack}`;
 
                             if (parseError) {
                                 error = `${message} [${file}:${parseError.line}:${parseError.column}]`;
-                            } else {
-                                error = `${message} ${stack}`;
                             }
 
                             compilation.errors.push(new Error(`${prefix}${error}`));
                         }
+                    }),
+                )),
+            );
 
-                        return callback();
-                    }, chunked);
-                }, done);
+            pluginCompatibility(compilation, 'optimizeChunkAssets', 'tapAsync', (chunks, done) => {
+                doChunks(chunks)
+                    /*  it's important not to pass any args inside `done`
+                        NOT: .then(done), ONLY: .then(() => done()) */
+                    .then(() => done());
             });
         });
     }

@@ -12,6 +12,5 @@ package-lock.json
 yarn.lock
 
 .eslintcache
-!lib/**.d.ts
-lib
+lib/**.js
 test/_out

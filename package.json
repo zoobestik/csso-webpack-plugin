@@ -1,6 +1,6 @@
 {
   "name": "csso-webpack-plugin",
-  "version": "1.0.0-beta.12",
+  "version": "2.0.0-beta.1",
   "author": "zoobestik <kb.chernenko@gmail.com>",
   "description": "CSSO minification files to serve your webpack bundles",
   "homepage": "https://github.com/zoobestik/csso-webpack-plugin",
@@ -16,7 +16,7 @@
   ],
   "main": "./lib/index",
   "engines": {
-    "node": ">=4.0.0"
+    "node": ">=8.0.0"
   },
   "licenses": [
     {
@@ -29,12 +29,9 @@
     "url": "https://github.com/zoobestik/csso-webpack-plugin.git"
   },
   "scripts": {
-    "itest": "npm run build && mocha",
     "lint": "eslint --cache .",
-    "lint-and-tests": "npm run lint && npm run itest",
-    "test": "npm run lint-and-tests",
-    "build": "babel src --out-dir lib && npm run flowgen",
-    "flowgen": "flowgen --global -o lib/index.js.flow lib/index.d.ts",
+    "test": "npm run build && mocha",
+    "build": "babel src --out-dir lib",
     "prepublish": "npm run build"
   },
   "precommit": [
@@ -49,25 +46,23 @@
   "typings": "lib/index.d.ts",
   "dependencies": {
     "@types/webpack": ">=4.0",
-    "async": "^2.5.0",
-    "csso": "^3.4.0",
-    "source-map": "^0.6.1",
+    "csso": "^4.0.2",
+    "source-map": "^0.7.3",
     "webpack-sources": "^1.0.1"
   },
   "devDependencies": {
-    "babel-cli": "^6.26.0",
-    "babel-eslint": "^8.0.0",
-    "babel-plugin-transform-object-rest-spread": "^6.26.0",
-    "babel-preset-env": "^1.6.0",
+    "@babel/cli": "^7.7.5",
+    "@babel/core": "^7.7.5",
+    "@babel/preset-env": "^7.7.6",
+    "babel-eslint": "^10.0.0",
     "css-loader": "^0.28.5",
-    "eslint": "^4.9.0",
-    "eslint-config-airbnb-base": "^12.1.0",
+    "eslint": "^6.7.2",
+    "eslint-config-airbnb-base": "^14.0.0",
     "eslint-plugin-import": "^2.7.0",
     "extract-text-webpack-plugin": "^2.1.0",
-    "flowgen": "^1.2.0",
-    "mocha": "^4.0.1",
+    "mocha": "^6.2.2",
     "pre-commit": "^1.2.2",
-    "rimraf": "^2.6.1",
+    "rimraf": "^3.0.0",
     "webpack": "^2.3.3"
   }
 }

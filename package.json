@@ -45,6 +45,7 @@
   ],
   "typings": "lib/index.d.ts",
   "dependencies": {
+    "@types/webpack": ">=4.0",
     "csso": "^4.0.2",
     "source-map": "^0.7.3",
     "webpack-sources": "^1.0.1"

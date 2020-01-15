@@ -1,3 +1,5 @@
+import {Compiler} from 'webpack';
+
 declare module 'csso-webpack-plugin' {
     type PluginOptions = any;
     type PluginFilterFn = (file: string) => boolean;
@@ -8,5 +10,6 @@ declare module 'csso-webpack-plugin' {
         private filter: PluginFilterFn;
 
         public constructor(options?: PluginOptions, filter?: PluginFilter);
+        apply(compiler: Compiler): void;
     }
 }

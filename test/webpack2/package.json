@@ -1,0 +1,7 @@
+{
+  "dependencies": {
+    "css-loader": "^0.28.11",
+    "extract-text-webpack-plugin": "^2.1.0",
+    "webpack": "^2.7.0"
+  }
+}

@@ -13,4 +13,4 @@ yarn.lock
 
 .eslintcache
 lib/**.js
-test/_out
+test/**/_out

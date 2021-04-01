@@ -1,0 +1,7 @@
+{
+  "dependencies": {
+    "css-loader": "^5.2.0",
+    "mini-css-extract-plugin": "^1.4.0",
+    "webpack": "^4.46.0"
+  }
+}

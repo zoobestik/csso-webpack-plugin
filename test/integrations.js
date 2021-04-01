@@ -59,7 +59,7 @@ describe('Integrations with webpack 2', function() {
                                 .replace(/\n$/g, '')
                                 .replace(/%%unit-hash%%/g, stats.hash);
 
-                            assert.equal(actual, expected,
+                            assert.strictEqual(actual, expected,
                                 'Output ' + testCase + ' — ' + name + ' file isn\'t equals ' + actualName
                             );
                         });

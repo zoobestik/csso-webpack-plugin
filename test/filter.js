@@ -3,13 +3,13 @@ const CssoWebpackPlugin = require('../lib').default;
 
 describe('Constructor', function() {
     function testDefaultOptions(plugin) {
-        assert.deepEqual(plugin.options, {}, 'default options inited');
+        assert.deepStrictEqual(plugin.options, {}, 'default options inited');
     }
 
     function testDefaultFilter(plugin) {
-        assert.equal(plugin.filter('files.css'), true, 'files.css should be true');
-        assert.equal(plugin.filter('files.js'), false, 'files.js should be false');
-        assert.equal(plugin.filter('/.css/file'), false, '/.css/file should be false');
+        assert.strictEqual(plugin.filter('files.css'), true, 'files.css should be true');
+        assert.strictEqual(plugin.filter('files.js'), false, 'files.js should be false');
+        assert.strictEqual(plugin.filter('/.css/file'), false, '/.css/file should be false');
     }
 
     it('default', function() {
@@ -21,8 +21,8 @@ describe('Constructor', function() {
     it('with options', function() {
         const options = { test: 1 };
         const plugin = new CssoWebpackPlugin(options);
-        assert.deepEqual(plugin.options, { test: 1 }, 'single argument with options');
-        assert.deepEqual(options, { test: 1 }, 'single argument with options immutable');
+        assert.deepStrictEqual(plugin.options, { test: 1 }, 'single argument with options');
+        assert.deepStrictEqual(options, { test: 1 }, 'single argument with options immutable');
         testDefaultFilter(plugin);
     });
 
@@ -30,9 +30,9 @@ describe('Constructor', function() {
         const plugin = new CssoWebpackPlugin(/^text/gi);
 
         testDefaultOptions(plugin);
-        assert.equal(plugin.filter('text-file.pcss'), true, 'text-file.pcss should be true');
-        assert.equal(plugin.filter('files.js'), false, 'files.js should be false');
-        assert.equal(plugin.filter('/.css/text'), false, '/.css/text should be false');
+        assert.strictEqual(plugin.filter('text-file.pcss'), true, 'text-file.pcss should be true');
+        assert.strictEqual(plugin.filter('files.js'), false, 'files.js should be false');
+        assert.strictEqual(plugin.filter('/.css/text'), false, '/.css/text should be false');
 
         assert.doesNotThrow(
             function() { new CssoWebpackPlugin({}, /^text/gi); },
@@ -45,10 +45,10 @@ describe('Constructor', function() {
 
         const oneArgPlugin = new CssoWebpackPlugin(filter);
         testDefaultOptions(oneArgPlugin);
-        assert.equal(oneArgPlugin.filter, filter, 'single `filter` should be set to this.filter');
+        assert.strictEqual(oneArgPlugin.filter, filter, 'single `filter` should be set to this.filter');
 
         const twoArgPlugin = new CssoWebpackPlugin({}, filter);
-        assert.equal(twoArgPlugin.filter, filter, 'second argument `filter` should be set to this.filter');
+        assert.strictEqual(twoArgPlugin.filter, filter, 'second argument `filter` should be set to this.filter');
     });
 
     it('unexpected type for filter', function() {

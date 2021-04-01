@@ -1,11 +1,12 @@
 {
     "presets": [
         [ "@babel/preset-env", {
+            "corejs": 3,
             "targets": {
-                "node": "8"
+                "node": "8.0.0"
             },
             "loose": true,
-            "useBuiltIns": "entry"
+            "useBuiltIns": "usage"
         } ]
     ]
 }

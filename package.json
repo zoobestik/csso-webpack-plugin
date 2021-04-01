@@ -30,7 +30,8 @@
   },
   "scripts": {
     "lint": "eslint --cache .",
-    "test": "npm run build && mocha",
+    "test": "npm run build && mocha \"./test/*/*.spec.js\"",
+    "test-prepare": "cd test/webpack2 && npm install && cd ../webpack4 && npm install && cd ../webpack5 && npm install",
     "build": "babel src --out-dir lib",
     "prepublish": "npm run build"
   },
@@ -55,14 +56,12 @@
     "@babel/core": "^7.7.5",
     "@babel/preset-env": "^7.7.6",
     "babel-eslint": "^10.0.0",
-    "css-loader": "^0.28.5",
+    "core-js": "^3.10.0",
     "eslint": "^6.7.2",
     "eslint-config-airbnb-base": "^14.0.0",
     "eslint-plugin-import": "^2.7.0",
-    "extract-text-webpack-plugin": "^2.1.0",
     "mocha": "^6.2.2",
     "pre-commit": "^1.2.2",
-    "rimraf": "^3.0.0",
-    "webpack": "^2.3.3"
+    "rimraf": "^3.0.0"
   }
 }

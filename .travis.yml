@@ -13,6 +13,7 @@ node_js:
   - "13"
   - "node"
 
+before_script: npm run test-prepare
 script: npm test
 
 branches:

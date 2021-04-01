@@ -1,5 +1,12 @@
 # Change Log
 
+## 2.0.0-beta.2 (April 1, 2021)
+
+Release candidate N2.2:
+
+ * Support new process assets in webpack 5 [#24](https://github.com/zoobestik/csso-webpack-plugin/issues/24) (posted by [@dotnetshadow](https://github.com/dotnetshadow))
+ * Fix types for Webpack Plugin [#18](https://github.com/zoobestik/csso-webpack-plugin/issues/18) (fixed by [Mikhail Bodrov](https://github.com/Connormiha))
+
 ## 2.0.0-beta.1 (December 12, 2019)
 
 Release candidate N2.1:

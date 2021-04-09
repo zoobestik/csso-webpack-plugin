@@ -1,5 +1,11 @@
 # Change Log
 
+## 2.0.0-beta.3 (April 9, 2021)
+
+Release candidate N2.3:
+
+* Move core-js from dev to runtime dependencies (closes [#28](https://github.com/zoobestik/csso-webpack-plugin/issues/28), [#29](https://github.com/zoobestik/csso-webpack-plugin/issues/29))
+
 ## 2.0.0-beta.2 (April 1, 2021)
 
 Release candidate N2.2:

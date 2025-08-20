@@ -1,6 +1,6 @@
 {
   "name": "csso-webpack-plugin",
-  "version": "2.0.0-beta.3",
+  "version": "3.0.0",
   "author": "zoobestik <kb.chernenko@gmail.com>",
   "description": "CSSO minification files to serve your webpack bundles",
   "homepage": "https://github.com/zoobestik/csso-webpack-plugin",
@@ -16,7 +16,8 @@
   ],
   "main": "./lib/index",
   "engines": {
-    "node": ">=8.0.0"
+    "node": "^10.13.0 || ^12.20.0 || ^14.13.0 || >=15.0.0",
+    "npm": ">=7.0.0"
   },
   "licenses": [
     {
@@ -30,7 +31,8 @@
   },
   "scripts": {
     "lint": "eslint --cache .",
-    "test": "npm run build && mocha \"./test/*/*.spec.js\"",
+    "test": "npm run build && jest",
+    "ci-test": "jest",
     "test-prepare": "cd test/webpack2 && npm install && cd ../webpack4 && npm install && cd ../webpack5 && npm install",
     "build": "babel src --out-dir lib",
     "prepublish": "npm run build"
@@ -48,20 +50,20 @@
   "dependencies": {
     "@types/webpack": ">=4.0",
     "core-js": "^3.10.1",
-    "csso": "^4.0.2",
+    "csso": "^5.0.5",
     "source-map": "^0.7.3",
-    "webpack-sources": "^1.0.1"
+    "webpack-sources": ">=1.0.1"
   },
   "devDependencies": {
     "@babel/cli": "^7.7.5",
     "@babel/core": "^7.7.5",
     "@babel/preset-env": "^7.7.6",
-    "babel-eslint": "^10.0.0",
-    "eslint": "^6.7.2",
-    "eslint-config-airbnb-base": "^14.0.0",
-    "eslint-plugin-import": "^2.7.0",
-    "mocha": "^6.2.2",
+    "@babel/eslint-parser": "^7.24.0",
+    "eslint": "^8.57.1",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.29.1",
+    "jest": "^27.5.1",
     "pre-commit": "^1.2.2",
-    "rimraf": "^3.0.0"
+    "rimraf": "^6.0.1"
   }
 }

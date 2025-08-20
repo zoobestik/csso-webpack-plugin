@@ -1,7 +1,7 @@
 const CssoWebpackPlugin = require('../../../../lib/index').default;
 
-module.exports = {
+module.exports = () => ({
     plugins: [
         new CssoWebpackPlugin(),
     ]
-};
+});

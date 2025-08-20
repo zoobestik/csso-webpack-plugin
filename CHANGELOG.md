@@ -1,5 +1,12 @@
 # Change Log
 
+## 2.0.0-beta.3 (August 20, 2025)
+
+Release 3.0.0:
+
+* Update CSSO to a new major version 5.x (closes [#31](https://github.com/zoobestik/csso-webpack-plugin/issues/31))
+* Drop support for Node.js < 10
+
 ## 2.0.0-beta.3 (April 9, 2021)
 
 Release candidate N2.3:

@@ -4,8 +4,8 @@ Object.defineProperty(require('os'), 'EOL', {
 
 const fs = require('fs');
 const join = require('path').join;
-const rimraf = require('rimraf');
 const assert = require('assert');
+const deleteRecursiveSync = require("./utils").deleteRecursiveSync;
 const setTestTimeout = require('./utils').setTestTimeout;
 
 const root = join(__dirname, 'integrations');
@@ -15,7 +15,7 @@ function runIntegrations(basePath, version) {
 
     const output = join(basePath, '_out');
 
-    rimraf.sync(output);
+    deleteRecursiveSync(output);
 
     const nodeVersions = process.version.split('.');
     const nodeMajorVersion = parseInt(nodeVersions[0].substring(1), 10);

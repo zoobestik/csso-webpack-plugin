@@ -1,0 +1,103 @@
+name: CI
+
+on:
+  push:
+    branches: [ "master", "dev" ]
+  pull_request:
+    branches: [ "master", "dev" ]
+  schedule:
+    # Run every night at 02:00 UTC, workflow itself will restrict to master via branch check in job if needed
+    - cron: '0 2 * * *'
+
+jobs:
+  build_pkg:
+    name: Build package on stable Node
+    if: ${{ (github.event_name != 'pull_request' || github.event.pull_request.draft == false) && (github.event_name != 'schedule' || github.ref == 'refs/heads/master') }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js lts/* (stable)
+        uses: actions/setup-node@v4
+        with:
+          node-version: 'lts/*'
+
+      - name: Install dependencies
+        run: npm i
+
+      - name: Lint sources
+        run: npm run lint
+
+      - name: Build library
+        run: npm run build
+
+      - name: Prepare integration test fixtures
+        run: npm run test-prepare
+
+      - name: Build library
+        run: npm run ci-test
+
+      - name: Upload package artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: built-libs
+          path: lib/
+
+  test:
+    name: Test on Node ${{ matrix.node-version }} / ${{ matrix.os }}
+    needs: build_pkg
+    if: ${{ (github.event_name != 'pull_request' || github.event.pull_request.draft == false) && (github.event_name != 'schedule' || github.ref == 'refs/heads/master') }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ ubuntu-latest, windows-latest ]
+        node-version:
+          - '10'
+          - '12'
+          - '14'
+          - '16'
+          - '18'
+          - '20'
+          - '22'
+          - 'node'    # latest current
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Ensure npm v7+
+        shell: bash
+        # language=bash
+        run: |
+          CURRENT_NPM=$(npm -v || echo 0)
+          MAJOR=${CURRENT_NPM%%.*}
+          echo "Detected npm version: $CURRENT_NPM"
+          if [ "${MAJOR:-0}" -lt 7 ]; then
+            echo "Upgrading npm to v7..."
+            npm i -g npm@7
+            echo "npm upgraded to: $(npm -v)"
+          else
+            echo "npm is already v7+"
+          fi
+
+      - name: Download built libs artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: built-libs
+          path: ./lib
+
+      - name: Install dependencies
+        run: npm i
+
+      - name: Prepare integration test fixtures
+        run: npm run test-prepare
+
+      - name: Run tests
+        run: npm run ci-test

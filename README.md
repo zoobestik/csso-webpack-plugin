@@ -1,8 +1,7 @@
 # CSSO Webpack Plugin
 [![npm][npm]][npm-url]
 [![node][node]][node-url]
-[![dependencies](https://img.shields.io/david/zoobestik/csso-webpack-plugin.svg)](https://david-dm.org/zoobestik/csso-webpack-plugin)
-[![status](https://travis-ci.org/zoobestik/csso-webpack-plugin.svg?branch=master)](https://travis-ci.org/zoobestik/csso-webpack-plugin)
+[![GitHub Actions Build Status](https://github.com/zoobestik/csso-webpack-plugin/actions/workflows/test.yml/badge.svg)](https://github.com/zoobestik/csso-webpack-plugin/actions/workflows/test.yml)
 [![downloads](https://img.shields.io/npm/dm/csso-webpack-plugin.svg)](http://npm-stats.com/~packages/csso-webpack-plugin)
 
 <img src="https://rawgithub.com/zoobestik/csso-webpack-plugin/dev/docs/img/logo.jpg" width="195" alt="Logo">
@@ -19,6 +18,11 @@
 ## Install
 ```bash
 npm i -D csso-webpack-plugin
+```
+
+For **`node` 8.0.0 > < 10.0.0** use [2.x](https://github.com/zoobestik/csso-webpack-plugin/tree/v1) version with `csso@^4`:
+```bash
+npm i -D csso-webpack-plugin@2
 ```
 
 For **`node` < 8.0.0** use [1.x](https://github.com/zoobestik/csso-webpack-plugin/tree/v1) version with `csso@^3`:

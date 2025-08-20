@@ -1,6 +1,6 @@
 # Change Log
 
-## 2.0.0-beta.3 (August 20, 2025)
+## 3.0.0 (August 20, 2025)
 
 Release 3.0.0:
 
